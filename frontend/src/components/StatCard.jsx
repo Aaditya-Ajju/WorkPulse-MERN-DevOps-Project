@@ -1,0 +1,2 @@
+import { ArrowDownRight, ArrowUpRight } from 'lucide-react';
+export default function StatCard({item,icon:Icon}) { return <article className="stat-card"><div className="stat-top"><div className={`stat-icon ${item.tone}`}><Icon size={19}/></div><span className={`stat-change ${item.tone}`}>{item.change.startsWith('-')?<ArrowDownRight size={14}/>:<ArrowUpRight size={14}/>} {item.change}</span></div><div className="stat-value">{item.value}</div><div className="stat-label">{item.label}</div></article>; }

@@ -1,0 +1,46 @@
+services:
+  mongodb:
+    image: mongo:7
+    container_name: workpulse-mongodb
+    restart: unless-stopped
+    volumes:
+      - mongo_data:/data/db
+    networks: [workpulse-net]
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./backend
+    container_name: workpulse-api
+    restart: unless-stopped
+    environment:
+      PORT: 5000
+      NODE_ENV: production
+      MONGODB_URI: mongodb://mongodb:27017/workpulse
+      CLIENT_ORIGIN: http://localhost:8080
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks: [workpulse-net]
+    # No host port published: Nginx reaches backend over the Compose network.
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: workpulse-web
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    depends_on: [backend]
+    networks: [workpulse-net]
+
+volumes:
+  mongo_data:
+
+networks:
+  workpulse-net:
+    driver: bridge
