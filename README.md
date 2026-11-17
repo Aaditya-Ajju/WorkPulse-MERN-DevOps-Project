@@ -2,7 +2,7 @@
 
 A realistic MERN starter application for hands-on DevOps practice. It includes a multi-page React UI with routing, a Node/Express API, MongoDB models, Dockerfiles, Docker Compose, and Nginx reverse-proxy configuration.
 
-## Current state
+## Current state Here
 - Frontend: working React app with routing and demo data.
 - Backend: Express API scaffold with health, attendance, employee, and leave endpoints.
 - Database: Mongoose models and connection helper.
@@ -11,6 +11,7 @@ A realistic MERN starter application for hands-on DevOps practice. It includes a
 
 ## Pages
 start from here : 
+
 - Login
 - Dashboard
 - Attendance
