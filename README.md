@@ -7,7 +7,7 @@ A realistic MERN starter application for hands-on DevOps practice. It includes a
 - Backend: Express API scaffold with health, attendance, employee, and leave endpoints.
 - Database: Mongoose models and connection helper.
 - DevOps: Dockerfiles, Compose, Nginx config, GitHub Actions CI starter.
-- Authentication and persistent CRUD are intentionally left as guided implementation tasks. Demo UI uses local mock data until those tasks are completed.
+- Authentication and persistent CRUD are intentionally left as guided implementation tasks. Demo UI uses local mock   data until those tasks are completed.
 
 ## Pages
 start from here : 
@@ -35,7 +35,7 @@ npm install
 npm run dev
 ```
 Frontend: http://localhost:5173  
-API health: http://localhost:5000/api/health
+API health: http://localhost:5000/api/health/
 
 For local backend + database, set `MONGODB_URI` in `backend/.env` to your MongoDB URI. Do not commit `.env`.
 
