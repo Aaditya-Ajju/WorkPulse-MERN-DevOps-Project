@@ -5,6 +5,7 @@ pipeline {
     }
 
     stages {
+
         stage('Checkout') {
             steps {
                 checkout scm
@@ -34,6 +35,13 @@ pipeline {
                 sh 'docker --version'
                 sh 'docker compose version'
                 sh 'docker system df'
+            }
+        }
+
+        stage('Docker Compose Validation') {
+            steps {
+                sh 'docker compose config --quiet'
+                echo 'Docker Compose configuration is valid'
             }
         }
 
