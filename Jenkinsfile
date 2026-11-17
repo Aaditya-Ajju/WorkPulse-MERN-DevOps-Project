@@ -1,3 +1,4 @@
+
 pipeline {
     agent {
         label 'workpulse-agent'
@@ -25,6 +26,13 @@ pipeline {
                     sh 'npm ci'
                     sh 'npm run build'
                 }
+            }
+        }
+
+        stage('Docker Verification') {
+            steps {
+                sh 'docker --version'
+                sh 'docker compose version'
             }
         }
     }
