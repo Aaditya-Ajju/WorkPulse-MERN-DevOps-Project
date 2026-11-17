@@ -10,7 +10,7 @@ A realistic MERN starter application for hands-on DevOps practice. It includes a
 - Authentication and persistent CRUD are intentionally left as guided implementation tasks. Demo UI uses local mock data until those tasks are completed.
 
 ## Pages
-start from here 
+start from here : 
 - Login
 - Dashboard
 - Attendance
