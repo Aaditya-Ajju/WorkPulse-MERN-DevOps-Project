@@ -17,7 +17,7 @@ pipeline {
             }
         }
 
-        // 2. Backend dependency installation and testing
+        // 2. Backend CI
         stage('Backend CI') {
             steps {
                 dir('backend') {
@@ -27,7 +27,7 @@ pipeline {
             }
         }
 
-        // 3. Frontend dependency installation and build
+        // 3. Frontend Build
         stage('Frontend Build') {
             steps {
                 dir('frontend') {
@@ -37,7 +37,7 @@ pipeline {
             }
         }
 
-        // 4. Verify Docker and Docker Compose
+        // 4. Docker Verification
         stage('Docker Verification') {
             steps {
                 sh 'docker --version'
@@ -46,36 +46,40 @@ pipeline {
             }
         }
 
-        // 5. Validate Docker Compose configuration
+        // 5. Docker Compose Validation
         stage('Docker Compose Validation') {
             steps {
-                sh 'docker compose config --quiet'
+                sh '''
+                    touch backend/.env
+                    trap 'rm -f backend/.env' EXIT
+                    docker compose config --quiet
+                '''
                 echo 'Docker Compose configuration is valid'
             }
         }
 
-        // 6. Build backend Docker image on Jenkins Agent
+        // 6. Build Backend Image
         stage('Build Backend Image') {
             steps {
                 sh 'docker build -t workpulse-backend:latest ./backend'
             }
         }
 
-        // 7. Build frontend Docker image on Jenkins Agent
+        // 7. Build Frontend Image
         stage('Build Frontend Image') {
             steps {
                 sh 'docker build -t workpulse-frontend:latest -f frontend/Dockerfile .'
             }
         }
 
-        // 8. List images built on Jenkins Agent
+        // 8. List Docker Images
         stage('List Docker Images') {
             steps {
                 sh 'docker images'
             }
         }
 
-        // 9. Deploy application to App EC2
+        // 9. Deploy to Application EC2
         stage('Deploy to App EC2') {
             steps {
                 withCredentials([
