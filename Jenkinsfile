@@ -33,6 +33,25 @@ pipeline {
             steps {
                 sh 'docker --version'
                 sh 'docker compose version'
+                sh 'docker system df'
+            }
+        }
+
+        stage('Build Backend Image') {
+            steps {
+                sh 'docker build -t workpulse-backend:latest ./backend'
+            }
+        }
+
+        stage('Build Frontend Image') {
+            steps {
+                sh 'docker build -t workpulse-frontend:latest -f frontend/Dockerfile .'
+            }
+        }
+
+        stage('List Docker Images') {
+            steps {
+                sh 'docker images'
             }
         }
     }
